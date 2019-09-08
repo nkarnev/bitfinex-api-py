@@ -49,10 +49,12 @@ def format_word(message, word, color_seq, bold=False, underline=False):
 class Formatter(logging.Formatter):
   '''
   This Formatted simply colors in the levelname i.e 'INFO', 'DEBUG'
+  To Change formatting add member variables below. e.g datefmt
   '''
   def __init__(self, msg, use_color = True):
     logging.Formatter.__init__(self, msg)
     self.use_color = use_color
+    self.datefmt='%Y-%m-%d %H:%M:%S'
 
   def format(self, record):
     """
@@ -70,7 +72,7 @@ class CustomLogger(logging.Logger):
     This adds extra logging functions such as logger.trade and also
     sets the logger to use the custom formatter
     '''
-    FORMAT = "[$BOLD%(name)s$RESET] [%(levelname)s] %(message)s"
+    FORMAT = "%(asctime)s [$BOLD%(name)s$RESET] [%(levelname)s] %(message)s"
     COLOR_FORMAT = formatter_message(FORMAT, True)
     TRADE = 50
 
